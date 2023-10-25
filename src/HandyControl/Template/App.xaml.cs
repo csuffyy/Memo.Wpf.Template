@@ -10,9 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Reflection;
+using System.Windows.Media;
 using Microsoft.Extensions.DependencyInjection;
 using HandyControl.Template.Views.Pages;
 using HandyControl.Template.Models;
+using HandyControl.Themes;
+using HandyControl.Tools;
 
 namespace HandyControl.Template
 {
@@ -41,6 +44,23 @@ namespace HandyControl.Template
                 .UseSerilog()
             .Build();
         }
+
+        internal void UpdateTheme(ApplicationTheme theme)
+        {
+            if (ThemeManager.Current.ApplicationTheme != theme)
+            {
+                ThemeManager.Current.ApplicationTheme = theme;
+            }
+        }
+
+        internal void UpdateAccent(Brush accent)
+        {
+            if (ThemeManager.Current.AccentColor != accent)
+            {
+                ThemeManager.Current.AccentColor = accent;
+            }
+        }
+
 
         private void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {

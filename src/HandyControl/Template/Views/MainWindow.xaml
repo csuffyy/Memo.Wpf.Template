@@ -45,10 +45,11 @@
         </ResourceDictionary>
     </hc:Window.Resources>
     <hc:Window.NonClientAreaContent>
-        <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
+        <DockPanel VerticalAlignment="Stretch">
             <Border
                 Margin="10,0,0,0"
                 Padding="10,4"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="{DynamicResource SolidBackgroundFillColorSecondaryBrush}"
                 CornerRadius="2">
@@ -65,8 +66,137 @@
                     <MenuItem Header="子菜单-2" />
                 </MenuItem>
             </Menu>
+            <Menu HorizontalAlignment="Left">
+                <MenuItem Height="29" Header="菜单">
+                    <MenuItem Header="子菜单-1" />
+                    <MenuItem Header="子菜单-2" />
+                    <MenuItem Header="子菜单-2" />
+                </MenuItem>
+            </Menu>
+            <Grid DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Name="ButtonConfig"
+                    Grid.Column="1"
+                    Margin="0,4"
+                    HorizontalAlignment="Right"
+                    hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                    Click="ButtonConfig_OnClick"
+                    Foreground="{DynamicResource PrimaryTextBrush}"
+                    Style="{StaticResource ButtonIcon}" />
+                <Popup
+                    Name="PopupConfig"
+                    Grid.Column="1"
+                    AllowsTransparency="True"
+                    HorizontalOffset="-35"
+                    PlacementTarget="{Binding ElementName=ButtonConfig}"
+                    StaysOpen="False"
+                    VerticalOffset="6">
+                    <Border
+                        Margin="16"
+                        Background="{DynamicResource SecondaryRegionBrush}"
+                        CornerRadius="4"
+                        Effect="{StaticResource EffectShadow2}">
+                        <StackPanel Button.Click="ButtonSkins_OnClick">
+                            <hc:Divider
+                                Width="200"
+                                Margin="0,10"
+                                Content="应用主题" />
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button Style="{StaticResource ButtonCustom}" Tag="{x:Static hc:ApplicationTheme.Light}">
+                                    <Border
+                                        Width="32"
+                                        Height="21"
+                                        Background="White"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                                <Button
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource ButtonCustom}"
+                                    Tag="{x:Static hc:ApplicationTheme.Dark}">
+                                    <Border
+                                        Width="32"
+                                        Height="21"
+                                        Background="Black"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                            </StackPanel>
 
-        </StackPanel>
+                            <hc:Divider
+                                Width="200"
+                                Margin="0,10"
+                                Content="重点颜色" />
+                            <StackPanel
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Button Style="{StaticResource ButtonCustom}" Tag="{Binding ElementName=primaryBorder, Path=Background}">
+                                    <Border
+                                        Name="primaryBorder"
+                                        Width="32"
+                                        Height="21"
+                                        Background="#2196F3"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                                <Button
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource ButtonCustom}"
+                                    Tag="{Binding ElementName=warningBorder, Path=Background}">
+                                    <Border
+                                        Name="warningBorder"
+                                        Width="32"
+                                        Height="21"
+                                        Background="{DynamicResource WarningBrush}"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                                <Button
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource ButtonCustom}"
+                                    Tag="{Binding ElementName=violetBorder, Path=Background}">
+                                    <Border
+                                        Name="violetBorder"
+                                        Width="32"
+                                        Height="21"
+                                        Background="#9C27B0"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                                <Button
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource ButtonCustom}"
+                                    Tag="{Binding ElementName=successBorder, Path=Background}">
+                                    <Border
+                                        Name="successBorder"
+                                        Width="32"
+                                        Height="21"
+                                        Background="{DynamicResource SuccessBrush}"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="2" />
+                                </Button>
+                            </StackPanel>
+                            <Button
+                                Margin="10"
+                                HorizontalAlignment="Stretch"
+                                Content="更多颜色"
+                                Tag="Picker" />
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>
+        </DockPanel>
     </hc:Window.NonClientAreaContent>
     <Border Background="{StaticResource CloudDrawingBrush}">
         <lc:NavigationView
